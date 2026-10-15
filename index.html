@@ -7,81 +7,109 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
-            --primary-color: #d4af37;
+            --primary-color: #d4af37; /* 典雅金色 */
+            --border-color: #2c3e50; /* 深藍色外框 */
             --text-main: #2c3e50;
             --text-light: #7f8c8d;
-            --bg-color: #fdfbf7;
+            --bg-color: #ffffff;
+            --page-bg: #f9f7f1; /* 淡淡的米白背景 */
         }
 
         body {
             margin: 0;
-            padding: 20px;
-            background-color: #f0e9df;
-            font-family: 'Noto Serif TC', serif, "Microsoft JhengHei";
+            padding: 40px 20px;
+            background-color: var(--page-bg);
+            font-family: 'Noto Serif TC', 'PMingLiU', serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            box-sizing: border-box;
         }
 
+        /* 橫式卡片主體 */
         .invitation-card {
             background-color: var(--bg-color);
             width: 100%;
-            max-width: 450px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            overflow: hidden;
+            max-width: 900px; /* 加寬以容納左右排版 */
+            display: flex;
+            border: 2px solid var(--border-color); /* 深藍色質感外框 */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+            padding: 20px; /* 外框與內容的留白 */
+            box-sizing: border-box;
             position: relative;
+        }
+
+        /* 左側照片區 */
+        .photo-section {
+            flex: 1;
+            min-height: 500px;
         }
 
         .hero-image {
             width: 100%;
-            height: 500px;
+            height: 100%;
             object-fit: cover;
-            object-position: center 20%;
+            object-position: center;
             display: block;
         }
 
-        .content {
-            padding: 40px 30px;
-            text-align: center;
+        /* 右側文字區 */
+        .content-section {
+            flex: 1;
+            padding: 40px 50px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: #fff;
+        }
+
+        /* 裝飾圖騰 */
+        .decor-top {
+            width: 60px;
+            margin-bottom: 20px;
+            opacity: 0.8;
         }
 
         .names {
             font-size: 28px;
             color: var(--text-main);
-            letter-spacing: 4px;
-            margin-bottom: 20px;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 15px;
+            font-weight: bold;
         }
 
         .heart {
             color: var(--primary-color);
-            font-size: 20px;
+            font-size: 18px;
         }
 
         .divider {
-            width: 40px;
-            height: 2px;
+            width: 50px;
+            height: 1px;
             background-color: var(--primary-color);
-            margin: 0 auto 25px;
+            margin: 0 auto 30px;
         }
 
         .message {
             color: var(--text-light);
-            font-size: 15px;
-            line-height: 1.8;
-            margin-bottom: 35px;
-            letter-spacing: 1px;
+            font-size: 14px;
+            line-height: 2;
+            margin-bottom: 40px;
+            letter-spacing: 1.5px;
+            text-align: center;
         }
 
         .details {
             text-align: left;
-            margin: 0 auto;
-            max-width: 300px;
+            width: 100%;
+            max-width: 280px;
         }
 
         .detail-item {
@@ -92,15 +120,15 @@
 
         .detail-icon {
             color: var(--primary-color);
-            font-size: 18px;
+            font-size: 16px;
             margin-right: 15px;
-            margin-top: 3px;
+            margin-top: 2px;
         }
 
         .detail-text h3 {
             margin: 0 0 5px 0;
-            font-size: 13px;
-            color: #bdc3c7;
+            font-size: 12px;
+            color: #95a5a6;
             letter-spacing: 2px;
             font-weight: normal;
         }
@@ -108,113 +136,32 @@
         .detail-text p {
             margin: 0;
             color: var(--text-main);
-            font-size: 15px;
-            line-height: 1.5;
+            font-size: 14px;
+            line-height: 1.6;
             letter-spacing: 1px;
         }
 
         .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
+            margin-top: 50px;
             color: #bdc3c7;
             font-size: 12px;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
         }
 
-        /* 下載按鈕樣式 (不會被截圖拍進去) */
+        /* 下載按鈕樣式 */
         .download-btn {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: var(--primary-color);
+            background-color: var(--border-color);
             color: white;
             border: none;
-            padding: 15px 25px;
+            padding: 12px 24px;
             border-radius: 30px;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-            font-family: 'Noto Serif TC', serif, "Microsoft JhengHei";
+            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+            font-family: 'Noto Serif TC', serif;
             letter-spacing: 1px;
-            transition: transform 0.2s, box-shadow 0.2s;
-            z-index: 100;
-        }
-
-        .download-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
-        }
-
-        /* 手機版適應 */
-        @media (max-width: 480px) {
-            body { padding: 0; }
-            .invitation-card { border-radius: 0; min-height: 100vh; }
-            .download-btn { bottom: 20px; right: 20px; padding: 12px 20px; font-size: 14px; }
-        }
-    </style>
-</head>
-<body>
-
-    <div class="invitation-card" id="capture-area">
-        <!-- 這裡已經幫您更新為新的圖片檔名 -->
-        <img src="20260313-SAM-2.jpg" alt="盧仲廉與史睿涵的婚紗照" class="hero-image">
-        
-        <div class="content">
-            <div class="names">
-                盧仲廉 <span class="heart">♥</span> 史睿涵
-            </div>
-            <div class="divider"></div>
-            
-            <div class="message">
-                我們決定攜手共度未來的每一天。<br>
-                誠摯地邀請您與我們一同分享這份喜悅，<br>
-                見證我們的愛情。
-            </div>
-
-            <div class="details">
-                <div class="detail-item">
-                    <div class="detail-icon">📅</div>
-                    <div class="detail-text">
-                        <h3>DATE</h3>
-                        <p>2026 年 12 月 12 日 (星期六)</p>
-                    </div>
-                </div>
-
-                <div class="detail-item">
-                    <div class="detail-icon">⏰</div>
-                    <div class="detail-text">
-                        <h3>TIME</h3>
-                        <p>入席時間：18:00</p>
-                    </div>
-                </div>
-
-                <div class="detail-item">
-                    <div class="detail-icon">📍</div>
-                    <div class="detail-text">
-                        <h3>VENUE</h3>
-                        <p>彭園八德館<br>
-                        <span style="font-size: 13px; color: #7f8c8d;">334 桃園市八德區大智里介壽路一段728號3樓</span></p>
-                    </div>
-                </div>
-            </div>
-
-            <div class="footer">
-                — SAVE THE DATE —
-            </div>
-        </div>
-    </div>
-
-    <!-- 下載圖片按鈕 -->
-    <button class="download-btn" onclick="downloadImage()">下載邀請卡</button>
-
-    <script>
-        function downloadImage() {
-            // 隱藏按鈕避免被截圖
-            const btn = document.querySelector('.download-btn');
-            btn.style.display = 'none';
-            
-            const card = document.getElementById('capture-area');
-            
-            // 使用 html2canvas 進行截圖
-            html2canvas(card, {
+            transition: all 0.3s ease;
+            z-index
