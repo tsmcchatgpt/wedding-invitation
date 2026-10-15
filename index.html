@@ -7,100 +7,135 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/html2canvas/1.4.1/html2canvas.min.js"></script>
     <style>
         :root {
-            --primary-color: #d4af37;
+            --primary-color: #d4af37; /* 典雅金色 */
+            --border-color: #2c3e50; /* 深藍色外框 */
             --text-main: #2c3e50;
             --text-light: #7f8c8d;
-            --bg-color: #fdfbf7;
+            --bg-color: #ffffff;
+            --page-bg: #f9f7f1; /* 淡淡的米白背景 */
         }
 
         body {
             margin: 0;
-            padding: 20px;
-            background-color: #f0e9df;
-            font-family: 'Noto Serif TC', serif, "Microsoft JhengHei";
+            padding: 40px 20px;
+            background-color: var(--page-bg);
+            font-family: 'Noto Serif TC', 'PMingLiU', serif;
             display: flex;
             justify-content: center;
             align-items: center;
             min-height: 100vh;
+            box-sizing: border-box;
         }
 
+        /* 橫式卡片主體 */
         .invitation-card {
             background-color: var(--bg-color);
             width: 100%;
-            max-width: 450px;
-            border-radius: 12px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.08);
-            overflow: hidden;
+            max-width: 950px; /* 稍微加寬，讓地址有足夠空間 */
+            display: flex;
+            border: 2px solid var(--border-color); /* 深藍色質感外框 */
+            box-shadow: 0 15px 40px rgba(0,0,0,0.06);
+            padding: 20px; /* 外框與內容的留白 */
+            box-sizing: border-box;
             position: relative;
+        }
+
+        /* 左側照片區 */
+        .photo-section {
+            flex: 1;
+            min-height: 500px;
         }
 
         .hero-image {
             width: 100%;
-            height: 500px;
+            height: 100%;
             object-fit: cover;
-            object-position: center 20%;
+            object-position: center;
             display: block;
         }
 
-        .content {
-            padding: 40px 30px;
-            text-align: center;
+        /* 右側文字區 */
+        .content-section {
+            flex: 1.1; /* 讓右側文字區稍微寬一點點 */
+            padding: 40px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            position: relative;
+            background-color: #fff;
+        }
+
+        /* 裝飾圖騰 */
+        .decor-top {
+            width: 60px;
+            margin-bottom: 20px;
+            opacity: 0.8;
         }
 
         .names {
             font-size: 28px;
             color: var(--text-main);
-            letter-spacing: 4px;
-            margin-bottom: 20px;
+            letter-spacing: 6px;
+            margin-bottom: 15px;
             display: flex;
             justify-content: center;
             align-items: center;
             gap: 15px;
+            font-weight: bold;
         }
 
         .heart {
             color: var(--primary-color);
-            font-size: 20px;
+            font-size: 18px;
         }
 
         .divider {
-            width: 40px;
-            height: 2px;
+            width: 50px;
+            height: 1px;
             background-color: var(--primary-color);
-            margin: 0 auto 25px;
+            margin: 0 auto 30px;
         }
 
         .message {
             color: var(--text-light);
-            font-size: 15px;
-            line-height: 1.8;
-            margin-bottom: 35px;
-            letter-spacing: 1px;
+            font-size: 14px;
+            line-height: 2;
+            margin-bottom: 40px;
+            letter-spacing: 1.5px;
+            text-align: center;
         }
 
         .details {
             text-align: left;
-            margin: 0 auto;
-            max-width: 300px;
+            width: 100%;
+            max-width: 380px; /* 加大寬度確保地址不會被擠到換行 */
         }
 
         .detail-item {
             display: flex;
             align-items: flex-start;
-            margin-bottom: 20px;
+            margin-bottom: 22px;
         }
 
         .detail-icon {
-            color: var(--primary-color);
-            font-size: 18px;
             margin-right: 15px;
-            margin-top: 3px;
+            margin-top: 2px;
+            display: flex;
+            align-items: center;
+        }
+
+        /* 高級質感 SVG 圖示樣式 */
+        .detail-icon svg {
+            width: 18px;
+            height: 18px;
+            stroke: var(--primary-color);
         }
 
         .detail-text h3 {
             margin: 0 0 5px 0;
-            font-size: 13px;
-            color: #bdc3c7;
+            font-size: 12px;
+            color: #95a5a6;
             letter-spacing: 2px;
             font-weight: normal;
         }
@@ -108,59 +143,69 @@
         .detail-text p {
             margin: 0;
             color: var(--text-main);
-            font-size: 15px;
-            line-height: 1.5;
+            font-size: 14px;
+            line-height: 1.6;
             letter-spacing: 1px;
         }
 
         .footer {
-            margin-top: 40px;
-            padding-top: 20px;
-            border-top: 1px solid #eee;
+            margin-top: 50px;
             color: #bdc3c7;
             font-size: 12px;
-            letter-spacing: 3px;
+            letter-spacing: 4px;
         }
 
-        /* 下載按鈕樣式 (不會被截圖拍進去) */
+        /* 下載按鈕樣式 */
         .download-btn {
             position: fixed;
             bottom: 30px;
             right: 30px;
-            background-color: var(--primary-color);
+            background-color: var(--border-color);
             color: white;
             border: none;
-            padding: 15px 25px;
+            padding: 12px 24px;
             border-radius: 30px;
-            font-size: 16px;
+            font-size: 15px;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(212, 175, 55, 0.4);
-            font-family: 'Noto Serif TC', serif, "Microsoft JhengHei";
+            box-shadow: 0 4px 15px rgba(44, 62, 80, 0.3);
+            font-family: 'Noto Serif TC', serif;
             letter-spacing: 1px;
-            transition: transform 0.2s, box-shadow 0.2s;
+            transition: all 0.3s ease;
             z-index: 100;
         }
 
         .download-btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.6);
+            background-color: var(--primary-color);
+            box-shadow: 0 6px 20px rgba(212, 175, 55, 0.4);
         }
 
-        /* 手機版適應 */
-        @media (max-width: 480px) {
-            body { padding: 0; }
-            .invitation-card { border-radius: 0; min-height: 100vh; }
-            .download-btn { bottom: 20px; right: 20px; padding: 12px 20px; font-size: 14px; }
+        /* 手機版自適應 */
+        @media (max-width: 850px) {
+            body { padding: 15px; }
+            .invitation-card { flex-direction: column; padding: 10px; }
+            .photo-section { min-height: 400px; }
+            .content-section { padding: 30px 20px; }
+            .download-btn { bottom: 20px; right: 20px; padding: 10px 20px; font-size: 14px; }
         }
     </style>
 </head>
 <body>
 
     <div class="invitation-card" id="capture-area">
-        <!-- 這裡已經幫您更新為新的圖片檔名 -->
-        <img src="20260313-SAM-2.jpg" alt="盧仲廉與史睿涵的婚紗照" class="hero-image">
+        <!-- 左側：照片區 -->
+        <div class="photo-section">
+            <img src="20260313-SAM-2.jpg" alt="盧仲廉與史睿涵的婚紗照" class="hero-image">
+        </div>
         
-        <div class="content">
+        <!-- 右側：文字資訊區 -->
+        <div class="content-section">
+            <!-- 裝飾用 SVG 葉片圖騰 -->
+            <svg class="decor-top" viewBox="0 0 100 100" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M50 10 C 60 30, 80 40, 90 50 C 80 60, 60 70, 50 90 C 40 70, 20 60, 10 50 C 20 40, 40 30, 50 10 Z" stroke="#d4af37" stroke-width="2" stroke-linejoin="round"/>
+                <path d="M50 20 L50 80" stroke="#d4af37" stroke-width="1.5"/>
+            </svg>
+
             <div class="names">
                 盧仲廉 <span class="heart">♥</span> 史睿涵
             </div>
@@ -174,7 +219,15 @@
 
             <div class="details">
                 <div class="detail-item">
-                    <div class="detail-icon">📅</div>
+                    <!-- 高級質感日曆圖示 -->
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect>
+                            <line x1="16" y1="2" x2="16" y2="6"></line>
+                            <line x1="8" y1="2" x2="8" y2="6"></line>
+                            <line x1="3" y1="10" x2="21" y2="10"></line>
+                        </svg>
+                    </div>
                     <div class="detail-text">
                         <h3>DATE</h3>
                         <p>2026 年 12 月 12 日 (星期六)</p>
@@ -182,7 +235,13 @@
                 </div>
 
                 <div class="detail-item">
-                    <div class="detail-icon">⏰</div>
+                    <!-- 高級質感時鐘圖示 -->
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <circle cx="12" cy="12" r="10"></circle>
+                            <polyline points="12 6 12 12 16 14"></polyline>
+                        </svg>
+                    </div>
                     <div class="detail-text">
                         <h3>TIME</h3>
                         <p>入席時間：18:00</p>
@@ -190,11 +249,17 @@
                 </div>
 
                 <div class="detail-item">
-                    <div class="detail-icon">📍</div>
+                    <!-- 高級質感地標圖示 -->
+                    <div class="detail-icon">
+                        <svg viewBox="0 0 24 24" fill="none" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+                            <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+                            <circle cx="12" cy="10" r="3"></circle>
+                        </svg>
+                    </div>
                     <div class="detail-text">
                         <h3>VENUE</h3>
-                        <p>彭園八德館<br>
-                        <span style="font-size: 13px; color: #7f8c8d;">334 桃園市八德區大智里介壽路一段728號3樓</span></p>
+                        <!-- 已經將地址改為同一行 -->
+                        <p>彭園八德館 <span style="font-size: 13px; color: #7f8c8d; margin-left: 4px;">334桃園市八德區大智里介壽路一段728號3樓</span></p>
                     </div>
                 </div>
             </div>
@@ -206,35 +271,29 @@
     </div>
 
     <!-- 下載圖片按鈕 -->
-    <button class="download-btn" onclick="downloadImage()">下載邀請卡</button>
+    <button class="download-btn" onclick="downloadImage()">下載卡片</button>
 
     <script>
         function downloadImage() {
-            // 隱藏按鈕避免被截圖
             const btn = document.querySelector('.download-btn');
-            btn.style.display = 'none';
+            btn.style.display = 'none'; // 隱藏按鈕避免被截圖
             
             const card = document.getElementById('capture-area');
             
-            // 使用 html2canvas 進行截圖
             html2canvas(card, {
                 scale: 2, // 提高畫質
-                useCORS: true // 允許載入圖片
+                useCORS: true,
+                backgroundColor: "#ffffff" // 確保背景是白色
             }).then(canvas => {
-                // 將 canvas 轉為圖片網址
                 const image = canvas.toDataURL("image/png");
-                
-                // 建立一個隱藏的下載連結並觸發點擊
                 const link = document.createElement('a');
                 link.download = '盧仲廉與史睿涵-婚禮邀請卡.png';
                 link.href = image;
                 link.click();
-                
-                // 恢復按鈕顯示
-                btn.style.display = 'block';
+                btn.style.display = 'block'; // 恢復顯示
             }).catch(err => {
                 console.error("截圖失敗:", err);
-                alert("下載失敗，請嘗試使用瀏覽器內建的列印存成 PDF 功能。");
+                alert("下載失敗，建議您使用瀏覽器的截圖功能。");
                 btn.style.display = 'block';
             });
         }
