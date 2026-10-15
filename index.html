@@ -31,11 +31,11 @@
         .invitation-card {
             background-color: var(--bg-color);
             width: 100%;
-            max-width: 950px; /* 稍微加寬，讓地址有足夠空間 */
+            max-width: 1050px; /* ★ 加寬總寬度，確保文字空間充足 */
             display: flex;
-            border: 2px solid var(--border-color); /* 深藍色質感外框 */
+            border: 2px solid var(--border-color);
             box-shadow: 0 15px 40px rgba(0,0,0,0.06);
-            padding: 20px; /* 外框與內容的留白 */
+            padding: 20px; 
             box-sizing: border-box;
             position: relative;
         }
@@ -56,14 +56,15 @@
 
         /* 右側文字區 */
         .content-section {
-            flex: 1.1; /* 讓右側文字區稍微寬一點點 */
-            padding: 40px 40px;
+            flex: 1.2; /* ★ 讓右側文字區比例再大一點 */
+            padding: 40px 50px;
             display: flex;
             flex-direction: column;
             justify-content: center;
             align-items: center;
             position: relative;
             background-color: #fff;
+            overflow: hidden;
         }
 
         /* 裝飾圖騰 */
@@ -109,7 +110,7 @@
         .details {
             text-align: left;
             width: 100%;
-            max-width: 380px; /* 加大寬度確保地址不會被擠到換行 */
+            max-width: 450px; /* ★ 解除原先過窄的寬度限制 */
         }
 
         .detail-item {
@@ -187,6 +188,7 @@
             .photo-section { min-height: 400px; }
             .content-section { padding: 30px 20px; }
             .download-btn { bottom: 20px; right: 20px; padding: 10px 20px; font-size: 14px; }
+            .detail-text p { white-space: normal !important; } /* 手機螢幕太小時允許換行避免破版 */
         }
     </style>
 </head>
@@ -258,8 +260,8 @@
                     </div>
                     <div class="detail-text">
                         <h3>VENUE</h3>
-                        <!-- 已經將地址改為同一行 -->
-                        <p>彭園八德館 <span style="font-size: 13px; color: #7f8c8d; margin-left: 4px;">334桃園市八德區大智里介壽路一段728號3樓</span></p>
+                        <!-- ★ 加入強制不換行 white-space: nowrap; 保證地址在同一行 -->
+                        <p style="white-space: nowrap;">彭園八德館 <span style="font-size: 13px; color: #7f8c8d; margin-left: 4px;">334桃園市八德區大智里介壽路一段728號3樓</span></p>
                     </div>
                 </div>
             </div>
@@ -276,21 +278,21 @@
     <script>
         function downloadImage() {
             const btn = document.querySelector('.download-btn');
-            btn.style.display = 'none'; // 隱藏按鈕避免被截圖
+            btn.style.display = 'none'; 
             
             const card = document.getElementById('capture-area');
             
             html2canvas(card, {
-                scale: 2, // 提高畫質
+                scale: 2, 
                 useCORS: true,
-                backgroundColor: "#ffffff" // 確保背景是白色
+                backgroundColor: "#ffffff" 
             }).then(canvas => {
                 const image = canvas.toDataURL("image/png");
                 const link = document.createElement('a');
                 link.download = '盧仲廉與史睿涵-婚禮邀請卡.png';
                 link.href = image;
                 link.click();
-                btn.style.display = 'block'; // 恢復顯示
+                btn.style.display = 'block'; 
             }).catch(err => {
                 console.error("截圖失敗:", err);
                 alert("下載失敗，建議您使用瀏覽器的截圖功能。");
