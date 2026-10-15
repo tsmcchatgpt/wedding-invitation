@@ -1,0 +1,206 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>仲廉 & 睿涵 婚禮邀請</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Serif+TC:wght@400;600&family=Great+Vibes&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    
+    <style>
+        body {
+            font-family: 'Noto Serif TC', serif;
+            margin: 0;
+            padding: 0;
+            background-color: #fcf9f2; /* 柔和的米色背景 */
+            color: #4a4a4a;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            /* 加上微妙的雜訊紋理增加質感 */
+            background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noiseFilter'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.65' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noiseFilter)' opacity='0.05'/%3E%3C/svg%3E");
+        }
+
+        .invitation-card {
+            background-color: white;
+            border-radius: 12px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.08);
+            overflow: hidden;
+            width: 100%;
+            max-width: 480px; /* 適合手機和桌面顯示的寬度 */
+            position: relative;
+            margin: 20px;
+            border: 1px solid #f0e6d2;
+        }
+
+        .photo-container {
+            width: 100%;
+            height: 60vh; /* 照片佔比較大的比例 */
+            min-height: 400px;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .photo-container img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%; /* 稍微調整焦點向上，確保人臉可見 */
+        }
+
+        /* 照片下方的漸層遮罩，讓文字更容易閱讀 */
+        .gradient-overlay {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            height: 40%;
+            background: linear-gradient(to top, rgba(255,255,255,1) 0%, rgba(255,255,255,0.8) 40%, rgba(255,255,255,0) 100%);
+        }
+
+        .content-container {
+            padding: 30px 40px 40px;
+            text-align: center;
+            background-color: white;
+            position: relative;
+            z-index: 10;
+            margin-top: -30px; /* 讓內容稍微覆蓋照片，增加層次感 */
+            border-radius: 20px 20px 0 0;
+        }
+
+        .chinese-names {
+            font-size: 1.5rem;
+            font-weight: 600;
+            letter-spacing: 4px;
+            margin-bottom: 25px;
+            color: #2c3e50;
+        }
+
+        .divider {
+            width: 40px;
+            height: 2px;
+            background-color: #d4af37;
+            margin: 0 auto 25px;
+        }
+
+        .info-row {
+            display: flex;
+            align-items: flex-start;
+            margin-bottom: 15px;
+            text-align: left;
+        }
+
+        .info-icon {
+            color: #d4af37;
+            width: 24px;
+            margin-right: 15px;
+            margin-top: 4px;
+            text-align: center;
+        }
+
+        .info-text {
+            flex: 1;
+        }
+
+        .info-label {
+            font-size: 0.85rem;
+            color: #888;
+            margin-bottom: 2px;
+            letter-spacing: 1px;
+        }
+
+        .info-value {
+            font-size: 1.05rem;
+            color: #333;
+            line-height: 1.5;
+        }
+
+        .save-the-date {
+            margin-top: 30px;
+            font-size: 0.9rem;
+            color: #999;
+            letter-spacing: 2px;
+            text-transform: uppercase;
+        }
+        
+        /* 裝飾性花邊 */
+        .decoration {
+            position: absolute;
+            width: 40px;
+            opacity: 0.6;
+        }
+        .dec-top-left { top: 20px; left: 20px; }
+        .dec-top-right { top: 20px; right: 20px; transform: scaleX(-1); }
+
+    </style>
+</head>
+<body>
+
+<div class="invitation-card" id="inviteCard">
+    
+    <!-- 照片區域 -->
+    <div class="photo-container">
+        <!-- 裝飾元素 -->
+        <svg class="decoration dec-top-left" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,0 C20,0 30,10 30,30 C30,10 40,0 50,0 C30,0 20,10 20,30 C20,10 10,0 0,0 Z" fill="#ffffff" opacity="0.8"/>
+        </svg>
+        <svg class="decoration dec-top-right" viewBox="0 0 50 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,0 C20,0 30,10 30,30 C30,10 40,0 50,0 C30,0 20,10 20,30 C20,10 10,0 0,0 Z" fill="#ffffff" opacity="0.8"/>
+        </svg>
+
+        <!-- 婚紗照 -->
+        <img src="20260313-SAM-0009.jpg" alt="盧仲廉與史睿涵的婚紗照">
+        
+        <div class="gradient-overlay"></div>
+    </div>
+
+    <!-- 內容區域 -->
+    <div class="content-container">
+        <div class="chinese-names">盧仲廉 &nbsp;<span style="font-size:0.8em; color:#d4af37;">&hearts;</span>&nbsp; 史睿涵</div>
+        
+        <div class="divider"></div>
+        
+        <p style="margin-bottom: 25px; font-size: 0.95rem; line-height: 1.8; color: #666;">
+            我們決定攜手共度未來的每一天。<br>
+            誠摯地邀請您與我們一同分享這份喜悅，<br>
+            見證我們的愛情。
+        </p>
+
+        <!-- 婚禮資訊 -->
+        <div class="info-row">
+            <div class="info-icon"><i class="far fa-calendar-alt"></i></div>
+            <div class="info-text">
+                <div class="info-label">DATE</div>
+                <div class="info-value">2026 年 12 月 12 日 (星期六)</div>
+            </div>
+        </div>
+
+        <div class="info-row">
+            <div class="info-icon"><i class="far fa-clock"></i></div>
+            <div class="info-text">
+                <div class="info-label">TIME</div>
+                <div class="info-value">入席時間：18:00</div>
+            </div>
+        </div>
+
+        <div class="info-row">
+            <div class="info-icon"><i class="fas fa-map-marker-alt"></i></div>
+            <div class="info-text">
+                <div class="info-label">VENUE</div>
+                <div class="info-value">
+                    <strong>彭園八德館</strong><br>
+                    <span style="font-size: 0.9rem; color: #666;">334 桃園市八德區大智里介壽路一段728號3樓</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="save-the-date">
+            — Save the Date —
+        </div>
+    </div>
+</div>
+
+</body>
+</html>
